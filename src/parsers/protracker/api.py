@@ -3,6 +3,7 @@ from http import HTTPStatus
 from httpx import HTTPStatusError
 
 from src.parsers.protracker.base import client
+from src.parsers.protracker.utils import convert_json_to_heroes
 
 
 async def get_heroes_list() -> dict:
@@ -19,5 +20,4 @@ async def get_heroes_list() -> dict:
             request=response.request,
             response=response,
         )
-
-    return response.json()
+    return convert_json_to_heroes(response.json())
