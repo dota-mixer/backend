@@ -23,8 +23,7 @@ class PositionStats(SQLModel):
 
 class HeroOut(SQLModel):
     model_config = ConfigDict(
-        populate_by_name=True,
-        arbitrary_types_allowed=True
+        populate_by_name=True, arbitrary_types_allowed=True
     )
 
     name: str = Field(alias="displayName")

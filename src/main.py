@@ -7,7 +7,7 @@ API_V1_STR = "/api/v1"
 
 
 def custom_generate_unique_id(route: APIRoute) -> str:
-    return f"{route.tags[0]}-{route.name}"
+    return f"{route.tags}-{route.name}"
 
 
 app = FastAPI(
