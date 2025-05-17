@@ -15,6 +15,9 @@ def convert_json_to_heroes(json_data: List[Dict]) -> List[HeroOut]:
         hero_data["primary_attribute"] = PrimaryAttribute(
             hero_data["primary_attribute"]
         )
+        hero_data["all_elo"] = hero_data.pop("all elo")
+        hero_data["all_matches"] = hero_data.pop("all matches")
+        hero_data["all_winrate"] = hero_data.pop("all winrate")
 
         for position in range(1, 6):
             position_key = f"pos {position}"
@@ -32,7 +35,5 @@ def convert_json_to_heroes(json_data: List[Dict]) -> List[HeroOut]:
         keys_to_remove += ["all elo", "all matches", "all winrate"]
         for key in keys_to_remove:
             hero_data.pop(key, None)
-
         heroes.append(HeroOut(**hero_data))
-
     return heroes
