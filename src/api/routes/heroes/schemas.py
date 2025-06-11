@@ -75,3 +75,34 @@ class HeroOut(SQLModel):
 class HeroesOut(SQLModel):
     data: list[HeroOut]
     count: int
+
+
+class ItemStat(SQLModel):
+    item_id: int
+    item_name: str
+    category: str
+    matches: int
+    wins: str
+    avg_purchase_time: float
+    std_purchase_time: float
+    earliest_purchase: int
+    latest_purchase: int
+    purchases_in_longer_matches: str
+    win_rate: float
+    purchase_rate: float
+    relative_purchase_rate: float
+
+
+class FacetItemStat(SQLModel):
+    facet_id: int
+    facet_name: str
+    facet_background: Optional[str] = None
+    facet_icon: Optional[str] = None
+    items: list[ItemStat]
+
+
+class HeroItemsOut(SQLModel):
+    hero_id: int
+    hero_name: str
+    hero_npc: str
+    facets: list[FacetItemStat]

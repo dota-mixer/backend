@@ -1,7 +1,11 @@
 from fastapi import APIRouter, HTTPException
 
-from src.api.routes.heroes.schemas import HeroOut, HeroesOut
-from src.parsers.protracker.api import get_heroes_list, get_hero_by_name
+from src.api.routes.heroes.schemas import HeroItemsOut, HeroOut, HeroesOut
+from src.parsers.protracker.api import (
+    get_hero_items,
+    get_heroes_list,
+    get_hero_by_name,
+)
 
 heroes_router = APIRouter(prefix="/heroes", tags=["heroes"])
 
@@ -13,6 +17,17 @@ async def read_heroes() -> HeroesOut:
     """
     heroes = await get_heroes_list()
     return HeroesOut(data=heroes, count=len(heroes))
+
+
+@heroes_router.get("/items")
+async def read_hero_items(
+    hero_id: int, position: str, days: int = 8
+) -> HeroItemsOut:
+    """
+    Get the items for a specific hero and position.
+    """
+    items = await get_hero_items(hero_id=hero_id, position=position, days=days)
+    return items
 
 
 @heroes_router.get("/{name}")
